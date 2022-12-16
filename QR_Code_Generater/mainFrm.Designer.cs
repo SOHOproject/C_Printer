@@ -30,6 +30,11 @@ namespace QR_Code_Generater
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainFrm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.picQRCode = new System.Windows.Forms.PictureBox();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
@@ -64,14 +69,18 @@ namespace QR_Code_Generater
             this.uiLine1 = new Sunny.UI.UILine();
             this.uiTabControl = new Sunny.UI.UITabControl();
             this.tabPage_Code = new System.Windows.Forms.TabPage();
+            this.uiLbErrorMsg = new Sunny.UI.UILabel();
             this.tabPage_PrintSetting = new System.Windows.Forms.TabPage();
             this.tabPage_History = new System.Windows.Forms.TabPage();
-            this.uiLbErrorMsg = new Sunny.UI.UILabel();
+            this.uiDgvCurrentInfo = new Sunny.UI.UIDataGridView();
+            this.dgvColBarCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvColRFID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.picQRCode)).BeginInit();
             this.panel1.SuspendLayout();
             this.uiTabControl.SuspendLayout();
             this.tabPage_Code.SuspendLayout();
             this.tabPage_PrintSetting.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.uiDgvCurrentInfo)).BeginInit();
             this.SuspendLayout();
             // 
             // picQRCode
@@ -99,14 +108,13 @@ namespace QR_Code_Generater
             // 
             // uiSymbolBtnClose
             // 
-            this.uiSymbolBtnClose.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiSymbolBtnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.uiSymbolBtnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(47)))), ((int)(((byte)(50)))));
             this.uiSymbolBtnClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiSymbolBtnClose.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(30)))), ((int)(((byte)(63)))));
             this.uiSymbolBtnClose.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiSymbolBtnClose.IsCircle = true;
-            this.uiSymbolBtnClose.Location = new System.Drawing.Point(1068, 6);
+            this.uiSymbolBtnClose.Location = new System.Drawing.Point(763, 6);
             this.uiSymbolBtnClose.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolBtnClose.Name = "uiSymbolBtnClose";
             this.uiSymbolBtnClose.RectSize = 2;
@@ -155,7 +163,7 @@ namespace QR_Code_Generater
             // uiLabel1
             // 
             this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.uiLabel1.Location = new System.Drawing.Point(3, 6);
+            this.uiLabel1.Location = new System.Drawing.Point(3, 51);
             this.uiLabel1.Name = "uiLabel1";
             this.uiLabel1.Size = new System.Drawing.Size(99, 34);
             this.uiLabel1.Style = Sunny.UI.UIStyle.Green;
@@ -169,7 +177,7 @@ namespace QR_Code_Generater
             // 
             this.uiTxtRFID.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.uiTxtRFID.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiTxtRFID.Location = new System.Drawing.Point(109, 9);
+            this.uiTxtRFID.Location = new System.Drawing.Point(109, 54);
             this.uiTxtRFID.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiTxtRFID.MinimumSize = new System.Drawing.Size(1, 16);
             this.uiTxtRFID.Name = "uiTxtRFID";
@@ -184,7 +192,7 @@ namespace QR_Code_Generater
             // uiLabel2
             // 
             this.uiLabel2.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.uiLabel2.Location = new System.Drawing.Point(3, 45);
+            this.uiLabel2.Location = new System.Drawing.Point(3, 12);
             this.uiLabel2.Name = "uiLabel2";
             this.uiLabel2.Size = new System.Drawing.Size(99, 34);
             this.uiLabel2.Style = Sunny.UI.UIStyle.Green;
@@ -198,7 +206,7 @@ namespace QR_Code_Generater
             // 
             this.uiTxtBarCode.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.uiTxtBarCode.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiTxtBarCode.Location = new System.Drawing.Point(109, 48);
+            this.uiTxtBarCode.Location = new System.Drawing.Point(109, 15);
             this.uiTxtBarCode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiTxtBarCode.MinimumSize = new System.Drawing.Size(1, 16);
             this.uiTxtBarCode.Name = "uiTxtBarCode";
@@ -542,7 +550,7 @@ namespace QR_Code_Generater
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(180, 547);
+            this.panel1.Size = new System.Drawing.Size(180, 596);
             this.panel1.TabIndex = 24;
             // 
             // uiLine1
@@ -556,7 +564,7 @@ namespace QR_Code_Generater
             this.uiLine1.Location = new System.Drawing.Point(180, 0);
             this.uiLine1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiLine1.Name = "uiLine1";
-            this.uiLine1.Size = new System.Drawing.Size(919, 43);
+            this.uiLine1.Size = new System.Drawing.Size(614, 43);
             this.uiLine1.Style = Sunny.UI.UIStyle.Custom;
             this.uiLine1.TabIndex = 25;
             this.uiLine1.Text = "PRINT SETTING";
@@ -579,7 +587,7 @@ namespace QR_Code_Generater
             this.uiTabControl.MenuStyle = Sunny.UI.UIMenuStyle.Custom;
             this.uiTabControl.Name = "uiTabControl";
             this.uiTabControl.SelectedIndex = 0;
-            this.uiTabControl.Size = new System.Drawing.Size(919, 504);
+            this.uiTabControl.Size = new System.Drawing.Size(614, 553);
             this.uiTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
@@ -594,6 +602,7 @@ namespace QR_Code_Generater
             // tabPage_Code
             // 
             this.tabPage_Code.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.tabPage_Code.Controls.Add(this.uiDgvCurrentInfo);
             this.tabPage_Code.Controls.Add(this.uiLbErrorMsg);
             this.tabPage_Code.Controls.Add(this.uiLabel1);
             this.tabPage_Code.Controls.Add(this.uiTxtRFID);
@@ -602,9 +611,23 @@ namespace QR_Code_Generater
             this.tabPage_Code.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
             this.tabPage_Code.Location = new System.Drawing.Point(0, 40);
             this.tabPage_Code.Name = "tabPage_Code";
-            this.tabPage_Code.Size = new System.Drawing.Size(919, 464);
+            this.tabPage_Code.Size = new System.Drawing.Size(614, 513);
             this.tabPage_Code.TabIndex = 0;
             this.tabPage_Code.Text = "掃條碼";
+            // 
+            // uiLbErrorMsg
+            // 
+            this.uiLbErrorMsg.AutoSize = true;
+            this.uiLbErrorMsg.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiLbErrorMsg.ForeColor = System.Drawing.Color.Red;
+            this.uiLbErrorMsg.Location = new System.Drawing.Point(105, 88);
+            this.uiLbErrorMsg.Name = "uiLbErrorMsg";
+            this.uiLbErrorMsg.Size = new System.Drawing.Size(81, 21);
+            this.uiLbErrorMsg.Style = Sunny.UI.UIStyle.Custom;
+            this.uiLbErrorMsg.TabIndex = 17;
+            this.uiLbErrorMsg.Text = "ERR MSG";
+            this.uiLbErrorMsg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLbErrorMsg.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // tabPage_PrintSetting
             // 
@@ -627,7 +650,7 @@ namespace QR_Code_Generater
             this.tabPage_PrintSetting.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
             this.tabPage_PrintSetting.Location = new System.Drawing.Point(0, 40);
             this.tabPage_PrintSetting.Name = "tabPage_PrintSetting";
-            this.tabPage_PrintSetting.Size = new System.Drawing.Size(919, 464);
+            this.tabPage_PrintSetting.Size = new System.Drawing.Size(647, 464);
             this.tabPage_PrintSetting.TabIndex = 2;
             this.tabPage_PrintSetting.Text = "列印設定";
             // 
@@ -637,30 +660,91 @@ namespace QR_Code_Generater
             this.tabPage_History.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
             this.tabPage_History.Location = new System.Drawing.Point(0, 40);
             this.tabPage_History.Name = "tabPage_History";
-            this.tabPage_History.Size = new System.Drawing.Size(919, 464);
+            this.tabPage_History.Size = new System.Drawing.Size(647, 464);
             this.tabPage_History.TabIndex = 1;
             this.tabPage_History.Text = "歷史紀錄";
             // 
-            // uiLbErrorMsg
+            // uiDgvCurrentInfo
             // 
-            this.uiLbErrorMsg.AutoSize = true;
-            this.uiLbErrorMsg.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiLbErrorMsg.ForeColor = System.Drawing.Color.Red;
-            this.uiLbErrorMsg.Location = new System.Drawing.Point(105, 91);
-            this.uiLbErrorMsg.Name = "uiLbErrorMsg";
-            this.uiLbErrorMsg.Size = new System.Drawing.Size(81, 21);
-            this.uiLbErrorMsg.Style = Sunny.UI.UIStyle.Custom;
-            this.uiLbErrorMsg.TabIndex = 17;
-            this.uiLbErrorMsg.Text = "ERR MSG";
-            this.uiLbErrorMsg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiLbErrorMsg.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiDgvCurrentInfo.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.uiDgvCurrentInfo.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.uiDgvCurrentInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiDgvCurrentInfo.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.uiDgvCurrentInfo.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDgvCurrentInfo.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.uiDgvCurrentInfo.ColumnHeadersHeight = 32;
+            this.uiDgvCurrentInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.uiDgvCurrentInfo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvColBarCode,
+            this.dgvColRFID});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(232)))), ((int)(((byte)(232)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.uiDgvCurrentInfo.DefaultCellStyle = dataGridViewCellStyle3;
+            this.uiDgvCurrentInfo.EnableHeadersVisualStyles = false;
+            this.uiDgvCurrentInfo.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDgvCurrentInfo.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
+            this.uiDgvCurrentInfo.Location = new System.Drawing.Point(0, 126);
+            this.uiDgvCurrentInfo.Name = "uiDgvCurrentInfo";
+            this.uiDgvCurrentInfo.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDgvCurrentInfo.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(232)))), ((int)(((byte)(232)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiDgvCurrentInfo.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.uiDgvCurrentInfo.RowTemplate.Height = 24;
+            this.uiDgvCurrentInfo.ScrollBarBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.uiDgvCurrentInfo.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
+            this.uiDgvCurrentInfo.ScrollBarRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
+            this.uiDgvCurrentInfo.SelectedIndex = -1;
+            this.uiDgvCurrentInfo.Size = new System.Drawing.Size(614, 387);
+            this.uiDgvCurrentInfo.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.uiDgvCurrentInfo.Style = Sunny.UI.UIStyle.Gray;
+            this.uiDgvCurrentInfo.TabIndex = 18;
+            this.uiDgvCurrentInfo.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiDgvCurrentInfo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.uiDgvCurrentInfo_CellContentClick);
+            // 
+            // dgvColBarCode
+            // 
+            this.dgvColBarCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dgvColBarCode.HeaderText = "BarCode";
+            this.dgvColBarCode.Name = "dgvColBarCode";
+            // 
+            // dgvColRFID
+            // 
+            this.dgvColRFID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dgvColRFID.HeaderText = "RFID";
+            this.dgvColRFID.Name = "dgvColRFID";
             // 
             // mainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ClientSize = new System.Drawing.Size(1099, 547);
+            this.ClientSize = new System.Drawing.Size(794, 596);
             this.Controls.Add(this.uiTabControl);
             this.Controls.Add(this.uiSymbolBtnClose);
             this.Controls.Add(this.uiLine1);
@@ -676,6 +760,7 @@ namespace QR_Code_Generater
             this.tabPage_Code.ResumeLayout(false);
             this.tabPage_Code.PerformLayout();
             this.tabPage_PrintSetting.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.uiDgvCurrentInfo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -719,6 +804,9 @@ namespace QR_Code_Generater
         private System.Windows.Forms.TabPage tabPage_History;
         private System.Windows.Forms.TabPage tabPage_PrintSetting;
         private Sunny.UI.UILabel uiLbErrorMsg;
+        private Sunny.UI.UIDataGridView uiDgvCurrentInfo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColBarCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvColRFID;
     }
 }
 

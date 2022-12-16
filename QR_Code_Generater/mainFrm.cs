@@ -50,7 +50,6 @@ namespace QR_Code_Generater
         }
         #endregion
 
-
         public mainFrm()
         {
             InitializeComponent();
@@ -64,8 +63,17 @@ namespace QR_Code_Generater
             this.pageSetupDialog1.Document = this.printDocument1;
             this.printPreviewDialog1.Document = this.printDocument1;
             this.printDialog1.Document = this.printDocument1;
-        }
+            //
+            DataGridViewButtonColumn dgvBtn = new DataGridViewButtonColumn();
+            dgvBtn.Name = "dgvBtn";
+            dgvBtn.HeaderText = "Print";
+            dgvBtn.Text = "...";
+            dgvBtn.DefaultCellStyle.NullValue = "...";
 
+            //
+            this.uiDgvCurrentInfo.Columns.Add(dgvBtn);            
+        }
+        
 
         private void mainFrm_Load(object sender, EventArgs e)
         {
@@ -79,6 +87,12 @@ namespace QR_Code_Generater
             this.m_Timer.Start();
             this.Loadsysconfig();
             this.uiLbErrorMsg.Text = string.Empty;
+
+           int i_dgvRowIdx =  this.uiDgvCurrentInfo.Rows.Add();
+            DataGridViewRow dgvRow = this.uiDgvCurrentInfo.Rows[i_dgvRowIdx];
+            dgvRow.Cells[0].Value = 123;
+            dgvRow.Cells[1].Value = 456;
+
         }
 
         private void btnGenertateQR_Click(object sender, EventArgs e)
@@ -314,6 +328,14 @@ namespace QR_Code_Generater
                 m_IsLock = (m_IsLock) ? false : true;
                 this.uiTxtBarCode.ReadOnly = !m_IsLock;
                 this.uiTxtRFID.ReadOnly = !m_IsLock;
+            }
+        }
+
+        private void uiDgvCurrentInfo_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex == 2)//button
+            {
+                
             }
         }
     }
